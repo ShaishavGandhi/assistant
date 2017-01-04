@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import jsonify
 from nlp.nlp import WitHelper
 app = Flask(__name__)
 
@@ -8,7 +9,7 @@ def query():
 	query = request.args.get('q')
 	helper = WitHelper()
 	nlp = helper.query(query)
-	return "Logging request"
+	return jsonify({"response" : { "success" : True }})
 
 
 if __name__ == "__main__":

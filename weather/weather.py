@@ -9,4 +9,5 @@ class Weather(object):
 
 	def getWeather(self, location, date):
 		weather = self.client.weather_at_place(location).get_weather()
+		# print str(self.client.daily_forecast(location).get_weather_at(#time))
 		return weather

@@ -6,6 +6,7 @@ class WitHelper(object):
 
 	access_token = "L44BYDXHQAP2DSB6E2HKTNLZGTFMHTBL"
 	intent_weather = "weather"
+	intent_temperature = "temperature unit"
 
 	def send(request, response):
 		print('Sending to user...', response['text'])
@@ -31,7 +32,12 @@ class WitHelper(object):
 
 		if intent == self.intent_weather:
 			location = entities["location"][0]["value"]
-			self.executeWeather(location, "")
+			date = entities["datetime"][0]["values"][0]["value"]
+			self.executeWeather(location, date)
+
+		if intent == self.intent_temperature:
+			print str(entities)
+
 
 	def executeWeather(self, location, date):
 		weather = Weather()
