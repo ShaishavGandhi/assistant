@@ -14,4 +14,4 @@ class ResponseCreator(object):
 		response = "The weather in " + str(location) + " is an average of " + str(average) + " degrees fahrenheit with maximum of " + str(max_temp) + " degrees and minimum of " + str(min_temp)
 		print response
 		tts = Speech()
-		tts.speak(response)
+		#tts.speak(response)
