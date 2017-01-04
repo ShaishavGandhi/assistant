@@ -8,7 +8,7 @@ def query():
 	query = request.args.get('q')
 	helper = WitHelper()
 	nlp = helper.query(query)
-	return "Logging request"
+	return jsonify({"response" : { "success" : True }})
 
 
 if __name__ == "__main__":
