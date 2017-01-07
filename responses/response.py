@@ -8,10 +8,10 @@ class ResponseCreator(object):
 
 	def createWeatherResponse(self, location, weather):
 		temperature = weather.get_temperature('fahrenheit')
-		max_temp = int(round(temperature["temp_max"]))
-		min_temp = int(round(temperature["temp_min"]))
-		average = int(round(temperature["temp"]))
-		response = "The weather in " + str(location) + " is an average of " + str(average) + " degrees fahrenheit with maximum of " + str(max_temp) + " degrees and minimum of " + str(min_temp)
+		max_temp = int(round(temperature["max"]))
+		min_temp = int(round(temperature["min"]))
+		average = int(round(temperature["day"]))
+		response = "The weather in " + str(location) + " is mainly " + weather.get_detailed_status() + " with an overall temperature of " + str(average) + " degrees fahrenheit with maximum of " + str(max_temp) + " degrees and minimum of " + str(min_temp)
 		print response
 		tts = Speech()
-		#tts.speak(response)
+		tts.speak(response)
