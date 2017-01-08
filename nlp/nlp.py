@@ -1,11 +1,13 @@
 from wit import Wit
 from responses.response import ResponseCreator
 from weather.weather import Weather
+from utils.format import FormatUtils
 
 class WitHelper(object):
 
 	access_token = "L44BYDXHQAP2DSB6E2HKTNLZGTFMHTBL"
 	intent_weather = "weather"
+	intent_temperature = "temperature unit"
 
 	def send(request, response):
 		print('Sending to user...', response['text'])
@@ -31,10 +33,18 @@ class WitHelper(object):
 
 		if intent == self.intent_weather:
 			location = entities["location"][0]["value"]
-			self.executeWeather(location, "")
+			formattedDate = None
+			if "datetime" in entities.keys():
+				date = entities["datetime"][0]["values"][0]["value"] # type : 2017-01-07T00:00:00.000-08:00
+				formattedDate = FormatUtils().getFormattedDate(date)
+			self.executeWeather(location, formattedDate)
+
+		if intent == self.intent_temperature:
+			print str(entities)
+
 
 	def executeWeather(self, location, date):
 		weather = Weather()
-		temp = weather.getWeather(location, "")
+		temp = weather.getWeather(location, date)
 		responseCreator = ResponseCreator()
 		responseCreator.createWeatherResponse(location, temp)

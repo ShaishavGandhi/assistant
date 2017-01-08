@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import jsonify
 from nlp.nlp import WitHelper
 app = Flask(__name__)
 
