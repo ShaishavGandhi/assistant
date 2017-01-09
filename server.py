@@ -7,8 +7,13 @@ app = Flask(__name__)
 @app.route("/query")
 def query():
 	query = request.args.get('q')
+	print "Query came as : " + query
 	helper = WitHelper()
 	nlp = helper.query(query)
+	return jsonify({"response" : { "success" : True }})
+
+@app.route("/")
+def ping():
 	return jsonify({"response" : { "success" : True }})
 
 
