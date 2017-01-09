@@ -2,12 +2,13 @@ from wit import Wit
 from responses.response import ResponseCreator
 from weather.weather import Weather
 from utils.format import FormatUtils
+from maps.map import Map
 
 class WitHelper(object):
 
 	access_token = "L44BYDXHQAP2DSB6E2HKTNLZGTFMHTBL"
 	intent_weather = "weather"
-	intent_temperature = "temperature unit"
+	intent_directions = "directions"
 
 	def send(request, response):
 		print('Sending to user...', response['text'])
@@ -28,6 +29,7 @@ class WitHelper(object):
 		self.classify(resp["entities"])
 
 	def classify(self, entities):
+		print entities
 		intent = entities["intent"][0]["value"]
 		confidence = entities["intent"][0]["confidence"]
 
@@ -39,8 +41,9 @@ class WitHelper(object):
 				formattedDate = FormatUtils().getFormattedDate(date)
 			self.executeWeather(location, formattedDate)
 
-		if intent == self.intent_temperature:
-			print str(entities)
+		if intent == self.intent_directions:
+			destination = entities["location"][0]["value"]
+			self.executeDirections(None, destination)
 
 
 	def executeWeather(self, location, date):
@@ -48,3 +51,9 @@ class WitHelper(object):
 		temp = weather.getWeather(location, date)
 		responseCreator = ResponseCreator()
 		responseCreator.createWeatherResponse(location, temp)
+
+	def executeDirections(self, origin, destination):
+		map = Map()
+		map_dict = map.getTimeTo("4 Charlton Court", destination)
+		responseCreator = ResponseCreator()
+		responseCreator.createMapResponse(map_dict)
