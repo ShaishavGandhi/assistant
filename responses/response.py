@@ -15,3 +15,12 @@ class ResponseCreator(object):
 		print response
 		tts = Speech()
 		tts.speak(response)
+
+	def createMapResponse(self, map_dict):
+		duration = map_dict["duration"]
+		distance = map_dict["distance"]
+		destination = map_dict["destination"]
+		response = "If you leave now, " + destination + " is " + distance + " away and will take you " + duration
+		print response
+		tts = Speech()
+		tts.speak(response)
