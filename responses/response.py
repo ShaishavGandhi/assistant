@@ -28,4 +28,4 @@ class ResponseCreator(object):
 
 	def speak(self, response):
 		tts = Speech()
-		# tts.speak(response)
+		tts.speak(response)
