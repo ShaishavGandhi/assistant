@@ -26,6 +26,10 @@ class ResponseCreator(object):
 		print response
 		self.speak(response)
 
+	def createSearchResponse(self, response):
+		print response
+		self.speak(response)
+
 	def speak(self, response):
 		tts = Speech()
 		tts.speak(response)
