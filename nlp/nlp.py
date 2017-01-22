@@ -16,17 +16,6 @@ class WitHelper(object):
 	intent_search = "search"
 	responseCreator = None
 
-	def send(request, response):
-		print('Sending to user...', response['text'])
-
-	def my_action(request):
-		print('Received from user...', request['text'])
-
-	actions = {
-		'send': send,
-		'my_action': my_action,
-	}
-
 	def __init__(self):
 		self.responseCreator = ResponseCreator();
 		self.ai = apiai.ApiAI(self.ai_access_token)
