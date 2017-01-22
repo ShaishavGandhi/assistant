@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
-from nlp.nlp import WitHelper
+from nlp.nlp import AIHelper
+from nlp.nlp_wit import WitHelper
 from utils.preferences import Preferences
 app = Flask(__name__)
 
