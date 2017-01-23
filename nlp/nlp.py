@@ -66,7 +66,10 @@ class AIHelper(object):
 		self.responseCreator.createMapResponse(map_dict)
 
 	def executeSearch(self, query):
-		response = Wolfram().query(query)
+		parameters = (
+		('podtitle', 'Wikipedia summary')
+		)
+		response = Wolfram().query(query, parameters)
 		if response == None:
 			response = "Sorry, I couldn't find the answer to that!"
 		self.responseCreator.createSearchResponse(response)

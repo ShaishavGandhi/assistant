@@ -1,4 +1,4 @@
-import wolframalpha
+import tungsten
 
 class Wolfram(object):
 
@@ -6,17 +6,19 @@ class Wolfram(object):
     client = None
 
     def __init__(self):
-        self.client = wolframalpha.Client(self.app_id)
+        self.client = tungsten.Tungsten(self.app_id)
 
     def query(self, query):
-        res = self.client.query(query)
+        params = {'parsetimeout' : 10}
+        # params = {"podtitle" : "Result", "podtitle" : "Latest recorded weather*"}
+        res = self.client.query(query, params)
         if res.pods == 0:
             return None
         for pod in res.pods:
-            print pod
-            if "@primary" in pod.keys():
-                for sub in pod.subpods:
-                    return sub["plaintext"]
-            if "@title" in pod.keys() and pod["@title"] == "Notable facts":
-                for sub in pod.subpods:
-                    return sub["plaintext"]
+            print pod.format["plaintext"][0] + " : " + pod.title
+            if pod.title == "Result":
+                return pod.format["plaintext"][0]
+            elif pod.id == "InstantaneousWeather:WeatherData":
+                return pod.format["plaintext"][0]
+            elif pod.title == "Definition":
+                return pod.format["plaintext"][0]
