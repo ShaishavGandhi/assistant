@@ -15,7 +15,9 @@ class Wolfram(object):
         if res.pods == 0:
             return None
         for pod in res.pods:
-            print pod.format["plaintext"][0] + " : " + pod.title
+            print "Title : " + pod.title
+            if pod.format["plaintext"][0] != None:
+                print pod.format["plaintext"][0] + " : " + pod.title
             if pod.title == "Result":
                 return pod.format["plaintext"][0]
             elif pod.id == "InstantaneousWeather:WeatherData":
